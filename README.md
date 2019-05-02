@@ -1,6 +1,10 @@
-#flanciskinho/wine
+# flanciskinho/wine
 
-Latest release: 0.1.0 - wine - [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/flanciskinho/wine)
+![Docker Pulls](https://img.shields.io/docker/pulls/flanciskinho/wine.svg)
+![Docker Stars](https://img.shields.io/docker/stars/flanciskinho/wine.svg)
+![](https://images.microbadger.com/badges/image/flanciskinho/wine.svg)
+
+Latest release: 0.2.0 - wine - [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/flanciskinho/wine)
 
 **A docker image to run wine**
 
@@ -21,7 +25,8 @@ If you find this image useful here's how you can help:
 
 Run docker image:
 
-	docker run --name wine-container -it flanciskinho/wine:0.1.0
+	docker pull flanciskinho/wine:0.2.0
+	docker run --name wine-container -it flanciskinho/wine:0.2.0
 
 ## Changelog
 

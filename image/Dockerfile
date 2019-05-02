@@ -1,28 +1,20 @@
-# start from ubuntu image
+# use ubuntu image
+# source https://hub.docker.com/_/ubuntu
 FROM ubuntu:19.04
 
-RUN apt update
-## to install wget and gcc
-RUN apt install -y wget build-essential
-## install 32 bits dependencies for wine
-RUN apt install -y lib32z1 gcc-multilib g++-multilib
-#RUN apt install -y xserver-xorg-dev:i386 libfreetype6-dev:i386
- 
-## install dependencies for wine
-RUN apt install -y flex bison
+# enable 32 bit architecture
+RUN dpkg --add-architecture i386
 
-## download wine
-RUN wget https://dl.winehq.org/wine/source/4.0/wine-4.0.tar.xz
-RUN unxz wine-4.0.tar.xz 
-RUN tar xf wine-4.0.tar
-RUN cd wine-4.0 \
-    && ./configure --without-freetype --without-x\
-    && make -j 4 \
-    && make install
 
-RUN export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH" 
+# update system
+# install wget and wine dependencies
+RUN apt-get update && apt-get install -y wget gnupg software-properties-common
 
-RUN echo "$PREFIX/lib" > /etc/ld.so.conf.d/wineLib.conf
-RUN ldconfig
+# add repository key and install (wine)
+RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
+RUN apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ disco main'
+RUN apt-get update && apt-get install -y --install-recommends wine
+
+RUN echo "Installed wine version: `wine --version`"
 
 

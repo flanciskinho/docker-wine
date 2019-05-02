@@ -1,5 +1,5 @@
 NAME = flanciskinho/wine
-VERSION = 0.1.0
+VERSION = 0.2.0
 
 .PHONY: build build-nocache tag-latest push push-latest release git-tag-version
 
@@ -18,7 +18,7 @@ push:
 push-latest:
 	docker push $(NAME):latest
 
-release: build test tag-latest push push-latest
+release: build tag-latest push push-latest
 
 git-tag-version: release
 	git tag -a v$(VERSION) -m "v$(VERSION)"
